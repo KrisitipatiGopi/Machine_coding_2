@@ -1,0 +1,24 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.inputContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.inputContainer input{
+    width: 200px;
+    padding: 7px;
+}
+.inputContainer button{
+    margin-left: 10px;
+    background-color: cadetblue;
+    color: white;
+    padding: 7px;
+    border: none;
+}
