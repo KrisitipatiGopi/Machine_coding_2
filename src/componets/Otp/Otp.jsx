@@ -1,56 +1,53 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Otp.css";
 
 const Otp = ({ phone }) => {
-  const [opt, setOpt] = useState(["", "", "", ""]);
-  const inputRefs = useRef([]);
-  const [isVerified, setIsVerified] = useState(false);
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const inputRefs = useRef(Array(otp.length).fill(null));
 
-  const handleChange = (index, e) => {
+  useEffect(() => {
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+  }, [phone]);
+
+  const handleChangeOtp = (e, index) => {
     const value = e.target.value;
-    const newOtp = [...opt];
+    
+    if (!/^\d?$/.test(value)) return;
+
+    const newOtp = [...otp];
     newOtp[index] = value;
-    setOpt(newOtp);
+    setOtp(newOtp);
 
-    if (value && index < 3) {
-        inputRefs.current[index + 1].focus();
+    if (value && index < otp.length - 1) {
+      inputRefs.current[index + 1]?.focus();
     }
-   
-    if(newOtp.every((digit) => digit !== "")){
-      handleSubmit(newOtp.join(""));
-    }
-
   };
 
-
-
   const handleKeyDown = (e, index) => {
-    if(e.key === "Backspace" && index > 0 && !opt[index]){
-      inputRefs.current[index - 1].focus();
+    if (e.key === "Backspace" && index > 0 && !otp[index]) {
+      inputRefs.current[index - 1]?.focus();
     }
-  }
-
-  const handleSubmit = (enteredOtp) => {
-    console.log(enteredOtp);
-    setIsVerified(true);
-  }
+  };
 
   return (
     <div>
-      <h3>Otp Sent to the {phone} </h3>
+      <h3 className="optText">OTP sent to {phone}</h3>
       <div className="otpContainer">
-        {opt.map((o, index) => (
+        {otp.map((_, index) => (
           <input
-            type="text"
-            maxLength={1}
             key={index}
-            onChange={(e) => handleChange(index, e)}
+            type="text"
+            className="input_b"
+            value={otp[index]}
+            onChange={(e) => handleChangeOtp(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             ref={(el) => (inputRefs.current[index] = el)}
-            onKeyDown={(e)=>handleKeyDown(e, index)}
+            maxLength={1}
           />
         ))}
       </div>
-      {isVerified && <p className="verified">✅ OTP Verified</p>}
     </div>
   );
 };

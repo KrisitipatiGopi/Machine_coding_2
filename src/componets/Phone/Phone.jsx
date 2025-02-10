@@ -4,37 +4,36 @@ import Otp from "../Otp/Otp";
 
 const Phone = () => {
   const [phone, setPhone] = useState("");
-  const [optSent, setOtpSent] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
-  const handleData = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (phone.length < 10 || phone.length > 10) {
-        alert("Invalid Phone Number")
-        return;
-    }else{
-        setOtpSent(true);
+    if (phone.length !== 10 || isNaN(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
     }
+    setIsSent(true);
   };
 
   return (
     <div className="mainContainer">
-      {!optSent ? (
-        <>
-          <h1>OTP LOGIN</h1>
-          <h3>Enter Your Mobile Number</h3>
+      <h1>OTP LOGIN</h1>
+      {!isSent ? (
+        <div className="innerContainer">
+          <h3>Enter Mobile Number</h3>
           <div className="inputContainer">
             <input
               type="text"
-              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Enter Mobile number"
               value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              maxLength={10}
             />
-            <button onClick={handleData}>Submit</button>
+            <button onClick={handleSubmit}>Submit</button>
           </div>
-        </>
-      ) : (
-        <div>
-          <Otp phone={phone}/>
         </div>
+      ) : (
+        <Otp phone={phone} />
       )}
     </div>
   );

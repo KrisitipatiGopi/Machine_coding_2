@@ -1,24 +1,75 @@
-.mainContainer{
+/* Main container for centering */
+.mainContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
 }
-.inputContainer{
+
+/* Styled Card */
+.innerContainer {
     display: flex;
-    flex-direction: row;
-    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    height: auto;
+    background: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    width: 350px;
 }
-.inputContainer input{
-    width: 200px;
-    padding: 7px;
+
+/* Title */
+h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
 }
-.inputContainer button{
-    margin-left: 10px;
-    background-color: cadetblue;
+
+/* Input Field */
+.inputContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.inputContainer input {
+    height: 45px;
+    width: 250px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.inputContainer input:focus {
+    border-color: #ff5733;
+    box-shadow: 0 0 8px rgba(255, 87, 51, 0.5);
+    transform: scale(1.05);
+}
+
+/* Submit Button */
+.inputContainer button {
+    height: 45px;
+    width: 100px;
+    border-radius: 8px;
+    background-color: #007bff;
     color: white;
-    padding: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
     border: none;
+}
+
+.inputContainer button:hover {
+    background-color: #ff5733;
+    transform: scale(1.05);
 }
